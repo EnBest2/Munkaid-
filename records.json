@@ -1,1 +1,12 @@
-[]
+[
+  {
+    "EmployeeName": "geri",
+    "IsEntry": true,
+    "Timestamp": "2025-07-25T18:38:36"
+  },
+  {
+    "EmployeeName": "geri",
+    "IsEntry": false,
+    "Timestamp": "2025-07-25T18:38:41"
+  }
+]
