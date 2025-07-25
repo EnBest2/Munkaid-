@@ -1,38 +1,29 @@
-const CACHE_NAME = 'time-tracker-v1';
-const FILES_TO_CACHE = [
-  '/',
+const CACHE_NAME = 'my-cache-v1';
+const RESOURCES = [
   '/index.html',
-  '/style.css',
-  '/app.js',
-  '/manifest.json',
-  '/icon-192.png',
-  '/icon-512.png',
-  '/employees.json',
-  '/records.json'
+  '/styles.css',
+  '/app.js'
 ];
 
-self.addEventListener('install', evt => {
-  evt.waitUntil(
-    caches.open(CACHE_NAME).then(cache => cache.addAll(FILES_TO_CACHE))
-  );
-  self.skipWaiting();
+self.addEventListener('install', event => {
+  event.waitUntil((async () => {
+    const cache = await caches.open(CACHE_NAME);
+    try {
+      await cache.addAll(RESOURCES);
+      console.log('Erőforrások cache-elve');
+    } catch (err) {
+      console.error('Cache addAll hiba:', err);
+    }
+  })());
 });
 
-self.addEventListener('activate', evt => {
-  evt.waitUntil(
-    caches.keys().then(keys =>
-      Promise.all(
-        keys.map(key => {
-          if (key !== CACHE_NAME) return caches.delete(key);
-        })
-      )
-    )
-  );
-  self.clients.claim();
-});
-
-self.addEventListener('fetch', evt => {
-  evt.respondWith(
-    caches.match(evt.request).then(resp => resp || fetch(evt.request))
-  );
+self.addEventListener('fetch', event => {
+  event.respondWith((async () => {
+    const cache = await caches.open(CACHE_NAME);
+    const cachedResponse = await cache.match(event.request);
+    if (cachedResponse) {
+      return cachedResponse;
+    }
+    return fetch(event.request);
+  })());
 });
