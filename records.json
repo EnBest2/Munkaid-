@@ -108,5 +108,15 @@
     "EmployeeName": "geri",
     "IsEntry": false,
     "Timestamp": "2025-07-25T18:24:12"
+  },
+  {
+    "EmployeeName": "geri",
+    "IsEntry": true,
+    "Timestamp": "2025-07-25T18:26:39"
+  },
+  {
+    "EmployeeName": "geri",
+    "IsEntry": false,
+    "Timestamp": "2025-07-25T18:26:46"
   }
 ]
