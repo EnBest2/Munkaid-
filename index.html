@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
+  <link rel="manifest" href="manifest.json" />
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  />
+  <link href="style.css" rel="stylesheet" />
+  <title>TimeTracker Dashboard</title>
+</head>
+<body>
+  <nav class="navbar navbar-dark bg-primary">
+    <div class="container-fluid">
+      <span class="navbar-brand mb-0 h1">TimeTracker</span>
+      <button class="btn btn-outline-light" id="installBtn">Telepítés</button>
+    </div>
+  </nav>
+
+  <div class="container my-4">
+    <!-- Dolgozói lista -->
+    <section class="mb-5">
+      <h4>Dolgozók listája</h4>
+      <ul class="list-group" id="employeeList"></ul>
+    </section>
+
+    <!-- Belépési / Kilépési rekordok -->
+    <section class="mb-5">
+      <h4>Jelenléti rekordok</h4>
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Név</th>
+              <th>Esemény</th>
+              <th>Időbélyeg</th>
+              <th>Munkaidő</th>
+            </tr>
+          </thead>
+          <tbody id="recordsTable"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Fizetések -->
+    <section>
+      <h4>Fizetések</h4>
+      <div class="table-responsive">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Név</th>
+              <th>Munkában töltött óra</th>
+              <th>Fizetés (HUF)</th>
+            </tr>
+          </thead>
+          <tbody id="salariesTable"></tbody>
+        </table>
+      </div>
+    </section>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="app.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('service-worker.js');
+    }
+  </script>
+</body>
+</html>
